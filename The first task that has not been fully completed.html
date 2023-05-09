@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>The first task that has not been fully completed (currently trying to draw the map)</title>
+</head>
+
+<style>
+* {
+margin: 0px;
+padding: 0px;
+}
+
+li {
+list-style: none;
+}
+
+#ul {
+overflow: auto;
+margin: 20px auto;
+border: 1px #000 solid;
+border-bottom: none;
+border-right:none;
+}
+
+#ul li {
+border: 1px #000 solid;
+border-top: none;
+border-left: none;
+float: left;
+}
+
+#ul li.sty1 {
+background-color: red;
+}
+
+#ul li.sty2 {
+background-color: green;
+}
+
+#ul li.sty3 {
+background-color: blue;
+}
+
+#input {
+width: 100px;
+position: absolute;
+left: 50%;
+}
+</style>
+
+<body>
+<ul id="ul"></ul>
+<input type="button" value="开始寻路" id="input">
+</body>
+
+<script>
+let oUl = document.getElementById('ul')
+let aLi = oUl.getElementsByTagName('li')
+let oInput = document.getElementById('input')
+let beginLi = oUl.getElementsByClassName('sty1')
+let endLi = oUl.getElementsByClassName('sty2')
+
+let map  = [
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,0,0,0,0,0,
+    0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,
+    0,0,0,1,0,0,0,0,3,3,3,3,3,3,3,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,3,0,3,3,3,3,3,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,2,0,0,
+    0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+]
+
+let cols = Math.sqrt(map.length)
+let sizeGird = 20
+
+init ()
+function init() {
+  createMap()
+  oInput.onclick = function() {
+    openFn()
+  }
+}
+
+function createMap() {
+    oUl.style.width = cols * ( sizeGird + 1 ) + 1 + 'px'
+    
+  for (let i = 0; i < map.length; i++) {
+      let oLi = document.createElement('li')
+      oLi.style.width = sizeGird + 'px'
+      oLi.style.height = sizeGird + 'px'
+      oUl.appendChild(oLi)
+      if (map[i] === 1) {
+          oLi.className = 'sty1'
+      } else if (map[i] ===2) {
+          oLi.className = 'sty2'
+      } else if (map[i] ===3) {
+          oLi.className = 'sty3'
+      }
+ }
+}
+
+</script>
+</html>
